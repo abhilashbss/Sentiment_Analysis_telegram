@@ -1,5 +1,4 @@
 import nltk
-import re
 import collections
 import regex as re
 
