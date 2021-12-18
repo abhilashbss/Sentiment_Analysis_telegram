@@ -31,11 +31,10 @@ class SentimentAnalysis:
         indexes_to_delete = []
 
         for ind in tqdm(messages_df.index):
-            cleaned_message = preprocess.clean_text(str(messages_df['text'][ind]))
-            if not preprocess.is_topic_filter(cleaned_message, self.filter_list):
+            if not preprocess.is_topic_filter(str(messages_df['text'][ind]), self.filter_list):
                 indexes_to_delete.append(ind)
                 continue
-            message = preprocess.remove_non_english_words(cleaned_message, words)
+            message = preprocess.remove_non_english_words(str(messages_df['text'][ind]), words)
             sentiment_dict = sid.polarity_scores(message)
             messages_df.at[ind, 'positive_score'] = sentiment_dict['pos']
             messages_df.at[ind, 'negative_score'] = sentiment_dict['neg']

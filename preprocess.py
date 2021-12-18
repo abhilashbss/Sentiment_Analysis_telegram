@@ -16,12 +16,8 @@ def flatten(foo):
             yield x
 
 
-def clean_text(message):
-    return re.sub(r"[^a-zA-Z0-9]+", " ", str(message))
-
-
 def is_topic_filter(sentence, filter_list):
     for filter_word in filter_list:
-        if filter_word.lower() in re.findall(r"[\w']+|[.,!?;]", sentence.lower()):
+        if filter_word.lower() in re.sub(r"[^a-zA-Z0-9]+", " ", sentence.lower()):
             return True
     return False
